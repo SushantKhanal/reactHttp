@@ -11,7 +11,7 @@ class NewPost extends Component {
     }
     postDataHandler = () => {
         const post = {...this.state}
-        axios.post('http://jsonplaceholder.typicode.com/posts', post)
+        axios.post('/posts', post)
             .then(response => {
                         console.log('data posted succesfully')
                     }, error => {
