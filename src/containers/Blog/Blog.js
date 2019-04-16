@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { Route, Link } from 'react-router-dom';
-// import axios from 'axios';
+import { Route, NavLink } from 'react-router-dom';
 import Posts from './Posts/Posts';
-import axios from '../../axios';
 import Post from '../../components/Post/Post';
 import NewPost from '../../containers/Blog/NewPost/NewPost';
 import './Blog.css';
@@ -16,8 +14,25 @@ class Blog extends Component {
                 <header>
                     <nav>
                         <ol>
-                            <li><Link to="/">Home</Link></li>
-                            <li><Link to="/new-post">New Post</Link></li>
+                            <li><NavLink 
+                                    to="/" 
+                                    exact
+                                    activeClassName="my-active"
+                                    activeStyle={{
+                                        color: "#fa923f",
+                                        textDecoration: "underline"
+                                    }}
+                                >
+                                Home
+                                </NavLink>
+                            </li>
+                            {/* <li><NavLink to="/new-post">New Post</NavLink></li> */}
+                            <li><NavLink to={{
+                                pathname: "/new-post",
+                                hash: "#submit",
+                                search: "?quick-submit=true"
+                            }}>New Post</NavLink></li>
+
                         </ol>
                     </nav>
                 </header>
