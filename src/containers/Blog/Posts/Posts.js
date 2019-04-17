@@ -26,16 +26,20 @@ class Posts extends Component {
 
     postSelectHandler = (id) => {
         this.setState({selectedPostId: id})
+        //the following code is the replacement for <Link>
+        // this.props.history.push({pathname: "/"+id});
+        this.props.history.push("/"+id);
     }
 
     render() {
         const posts = this.state.posts.map(post=>
-            <Link to={'/'+ post.id} key={post.id} >
+            // <Link to={'/'+ post.id} key={post.id} >
                 <Post clicked={()=>this.postSelectHandler(post.id)}
                     title={post.title} 
                     author={post.author}
                 />
-            </Link>)
+            // </Link>
+            )
         return (
             <section className="Posts">
                 {posts}
