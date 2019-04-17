@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 
 import './NewPost.css';
 
@@ -7,7 +8,8 @@ class NewPost extends Component {
     state = {
         title: '',
         content: '',
-        author: 'Max'
+        author: 'Max',
+        submitted: false,
     }
 
     componentDidMount () {
@@ -19,6 +21,7 @@ class NewPost extends Component {
         axios.post('/posts', post)
             .then(response => {
                         console.log('data posted succesfully')
+                        this.setState({submitted: true})
                     }, error => {
                         console.log('error posting data')
                  })
@@ -38,6 +41,8 @@ class NewPost extends Component {
                     <option value="Manu">Manu</option>
                 </select>
                 <button onClick={this.postDataHandler}>Add Post</button>
+                {this.state.submitted && <Redirect to="/"/>} 
+                {/* outside of Switch component Redirect takes only "to" property but not "from"  */}
             </div>
         );
     }
