@@ -21,13 +21,15 @@ class NewPost extends Component {
         axios.post('/posts', post)
             .then(response => {
                         console.log('data posted succesfully')
-                        this.setState({submitted: true})
+                        this.props.history.push('/posts')
+                        // this.setState({submitted: true})
                     }, error => {
                         console.log('error posting data')
                  })
     }
 
     render () {
+        // let redirect = this.state.submitted ? <Redirect to="/"/> : null;
         return (
             <div className="NewPost">
                 <h1>Add a Post</h1>
@@ -41,7 +43,7 @@ class NewPost extends Component {
                     <option value="Manu">Manu</option>
                 </select>
                 <button onClick={this.postDataHandler}>Add Post</button>
-                {this.state.submitted && <Redirect to="/"/>} 
+                {/* {redirect}  */}
                 {/* outside of Switch component Redirect takes only "to" property but not "from"  */}
             </div>
         );
