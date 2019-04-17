@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
 import { Route, NavLink, Switch, Redirect } from 'react-router-dom';
 import Posts from './Posts/Posts';
-import NewPost from '../../containers/Blog/NewPost/NewPost';
+import asyncComponent from '../../hoc/asyncComponent/asyncComponent';
+// import NewPost from '../../containers/Blog/NewPost/NewPost';
 import './Blog.css';
+
+const AsyncNewPost = asyncComponent(() => {  //now i am only importing NewPost when the constant 'asyncNewPost' gets used somewhere
+    return import('../../containers/Blog/NewPost/NewPost');
+})
 
 class Blog extends Component {
 
     state = {
-        auth : false,
+        auth : true,
     }
 
     render () {
@@ -40,7 +45,8 @@ class Blog extends Component {
                     </nav>
                 </header>
                 <Switch>
-                    {this.state.auth ? <Route path="/new-post" exact component={NewPost}/> : null}  {/*order is important here*/}
+                    {/* {this.state.auth ? <Route path="/new-post" exact component={NewPost}/> : null} */}
+                    {this.state.auth ? <Route path="/new-post" exact component={AsyncNewPost}/> : null}  {/*order is important here*/}
                     <Route path="/posts" component={Posts}/>
                     {/* <Redirect from="/" to="/posts"/> */}
                     <Route render={()=><h1 style={{textAlign: 'center'}}>Page Not Found</h1>} />
