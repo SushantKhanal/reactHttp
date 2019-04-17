@@ -6,6 +6,10 @@ import './Blog.css';
 
 class Blog extends Component {
 
+    state = {
+        auth : false,
+    }
+
     render () {
 
         return (
@@ -36,9 +40,10 @@ class Blog extends Component {
                     </nav>
                 </header>
                 <Switch>
-                    <Route path="/new-post" exact component={NewPost}/>  {/*order is important here*/}
+                    {this.state.auth ? <Route path="/new-post" exact component={NewPost}/> : null}  {/*order is important here*/}
                     <Route path="/posts" component={Posts}/>
-                    <Redirect from="/" to="/posts"/>
+                    {/* <Redirect from="/" to="/posts"/> */}
+                    <Route render={()=><h1 style={{textAlign: 'center'}}>Page Not Found</h1>} />
                 </Switch>
                 {/* <Route path="/" exact render={()=><Posts/>}/> */}
             </div>
